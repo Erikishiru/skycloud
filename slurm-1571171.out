@@ -1,0 +1,75 @@
+11:23:45 [INFO] main: Configuration: 
+
+experiment_name: experiment_1
+optimize_metric: accuracy
+data:
+  train:
+    image_path: /home/people/19208824/scratch/piyush/data/WSISEG-Database-split/whole-sky-images/train/
+    label_path: /home/people/19208824/scratch/piyush/data/WSISEG-Database-split/annotation/train/
+  val:
+    image_path: /home/people/19208824/scratch/piyush/data/WSISEG-Database-split/whole-sky-images/val/
+    label_path: /home/people/19208824/scratch/piyush/data/WSISEG-Database-split/annotation/val/
+base_transform:
+  _target_: torchvision.transforms.Resize
+  size:
+  - 64
+  - 64
+  interpolation: NEAREST
+train_transform:
+  _target_: utils.rand_augment.RandAugment
+  'n': 4
+  m: 15
+train_params:
+  batch_size: 32
+  max_epochs: 5
+  enable_early_stopping: true
+model_params:
+  checkpoint: null
+  model:
+    _target_: torchvision.models.segmentation.deeplabv3_resnet50
+    progress: true
+    num_classes: 3
+optimizer:
+  _target_: torch.optim.Adam
+  lr: 0.001
+  weight_decay: 0.0
+criterion:
+  _target_: torch.nn.CrossEntropyLoss
+early_stopping:
+  _target_: utils.model.EarlyStopping
+  patience: 10
+  delta: 0
+evaluate:
+  image_path: /home/people/19208824/scratch/piyush/data/WSISEG-Database-split/whole-sky-images/test/
+  label_path: /home/people/19208824/scratch/piyush/data/WSISEG-Database-split/annotation/test/
+  batch_size: 32
+  model_path: /home/people/19208824/scratch/piyush/segment/SkyCloudAugmentation/deeplabv3/experiments/experiment_1/models/model_best.pth
+
+/home/people/19208824/.conda/envs/piyush/lib/python3.8/site-packages/torchvision/transforms/transforms.py:257: UserWarning: Argument interpolation should be of type InterpolationMode instead of int. Please, use InterpolationMode enum.
+  warnings.warn(
+11:23:45 [INFO] __init__: Loading data from /home/people/19208824/scratch/piyush/data/WSISEG-Database-split/whole-sky-images/train/. Dataset size: 301
+11:23:45 [INFO] __init__: Loading data from /home/people/19208824/scratch/piyush/data/WSISEG-Database-split/whole-sky-images/val/. Dataset size: 49
+11:23:45 [INFO] get_model: Intialised model...
+11:23:48 [INFO] train: Starting Training ...
+  0%|          | 0/10 [00:00<?, ?it/s] 10%|█         | 1/10 [00:00<00:08,  1.10it/s] 20%|██        | 2/10 [00:01<00:05,  1.52it/s] 30%|███       | 3/10 [00:01<00:04,  1.73it/s] 40%|████      | 4/10 [00:02<00:03,  1.82it/s] 50%|█████     | 5/10 [00:02<00:02,  1.92it/s] 60%|██████    | 6/10 [00:03<00:02,  1.99it/s] 70%|███████   | 7/10 [00:03<00:01,  2.04it/s] 80%|████████  | 8/10 [00:04<00:00,  2.05it/s] 90%|█████████ | 9/10 [00:04<00:00,  2.08it/s]100%|██████████| 10/10 [00:04<00:00,  2.48it/s]100%|██████████| 10/10 [00:04<00:00,  2.02it/s]
+11:23:53 [INFO] train: Epoch [1/5]: Train: Loss: 1.0938
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  2.34it/s]100%|██████████| 2/2 [00:00<00:00,  3.22it/s]100%|██████████| 2/2 [00:00<00:00,  3.04it/s]
+11:23:53 [INFO] train: Epoch [1/5]: Val: mIoU: 0.7716, Accuracy: 0.5365, Loss: 1.5733, MCC: 0.4093
+  0%|          | 0/10 [00:00<?, ?it/s] 10%|█         | 1/10 [00:00<00:04,  2.06it/s] 20%|██        | 2/10 [00:00<00:03,  2.11it/s] 30%|███       | 3/10 [00:01<00:03,  2.11it/s] 40%|████      | 4/10 [00:01<00:02,  2.12it/s] 50%|█████     | 5/10 [00:02<00:02,  2.10it/s] 60%|██████    | 6/10 [00:02<00:01,  2.12it/s] 70%|███████   | 7/10 [00:03<00:01,  2.10it/s] 80%|████████  | 8/10 [00:03<00:00,  2.12it/s] 90%|█████████ | 9/10 [00:04<00:00,  2.12it/s]100%|██████████| 10/10 [00:04<00:00,  2.57it/s]100%|██████████| 10/10 [00:04<00:00,  2.24it/s]
+11:23:59 [INFO] train: Epoch [2/5]: Train: Loss: 0.7621
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  2.35it/s]100%|██████████| 2/2 [00:00<00:00,  3.20it/s]100%|██████████| 2/2 [00:00<00:00,  3.03it/s]
+11:24:00 [INFO] train: Epoch [2/5]: Val: mIoU: 0.7849, Accuracy: 0.6756, Loss: 0.8391, MCC: 0.5538
+  0%|          | 0/10 [00:00<?, ?it/s] 10%|█         | 1/10 [00:00<00:04,  2.05it/s] 20%|██        | 2/10 [00:00<00:03,  2.12it/s] 30%|███       | 3/10 [00:01<00:03,  2.14it/s] 40%|████      | 4/10 [00:01<00:02,  2.13it/s] 50%|█████     | 5/10 [00:02<00:02,  2.13it/s] 60%|██████    | 6/10 [00:02<00:01,  2.13it/s] 70%|███████   | 7/10 [00:03<00:01,  2.13it/s] 80%|████████  | 8/10 [00:03<00:00,  2.11it/s] 90%|█████████ | 9/10 [00:04<00:00,  2.12it/s]100%|██████████| 10/10 [00:04<00:00,  2.56it/s]100%|██████████| 10/10 [00:04<00:00,  2.25it/s]
+11:24:06 [INFO] train: Epoch [3/5]: Train: Loss: 0.6606
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  2.17it/s]100%|██████████| 2/2 [00:00<00:00,  2.71it/s]100%|██████████| 2/2 [00:00<00:00,  2.60it/s]
+11:24:07 [INFO] train: Epoch [3/5]: Val: mIoU: 0.8121, Accuracy: 0.7164, Loss: 0.6586, MCC: 0.5834
+  0%|          | 0/10 [00:00<?, ?it/s] 10%|█         | 1/10 [00:00<00:04,  2.09it/s] 20%|██        | 2/10 [00:00<00:03,  2.10it/s] 30%|███       | 3/10 [00:01<00:03,  2.09it/s] 40%|████      | 4/10 [00:01<00:02,  2.10it/s] 50%|█████     | 5/10 [00:02<00:02,  2.11it/s] 60%|██████    | 6/10 [00:02<00:01,  2.12it/s] 70%|███████   | 7/10 [00:03<00:01,  2.11it/s] 80%|████████  | 8/10 [00:03<00:00,  2.12it/s] 90%|█████████ | 9/10 [00:04<00:00,  2.12it/s]100%|██████████| 10/10 [00:04<00:00,  2.57it/s]100%|██████████| 10/10 [00:04<00:00,  2.24it/s]
+11:24:13 [INFO] train: Epoch [4/5]: Train: Loss: 0.5950
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  2.32it/s]100%|██████████| 2/2 [00:00<00:00,  3.22it/s]100%|██████████| 2/2 [00:00<00:00,  3.04it/s]
+11:24:14 [INFO] train: Epoch [4/5]: Val: mIoU: 0.8361, Accuracy: 0.7500, Loss: 0.5876, MCC: 0.6280
+  0%|          | 0/10 [00:00<?, ?it/s] 10%|█         | 1/10 [00:00<00:04,  2.11it/s] 20%|██        | 2/10 [00:00<00:03,  2.11it/s] 30%|███       | 3/10 [00:01<00:03,  2.12it/s] 40%|████      | 4/10 [00:01<00:02,  2.13it/s] 50%|█████     | 5/10 [00:02<00:02,  2.13it/s] 60%|██████    | 6/10 [00:02<00:01,  2.13it/s] 70%|███████   | 7/10 [00:03<00:01,  2.14it/s] 80%|████████  | 8/10 [00:03<00:00,  2.11it/s] 90%|█████████ | 9/10 [00:04<00:00,  2.03it/s]100%|██████████| 10/10 [00:04<00:00,  2.45it/s]100%|██████████| 10/10 [00:04<00:00,  2.21it/s]
+11:24:20 [INFO] train: Epoch [5/5]: Train: Loss: 0.5624
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  2.23it/s]100%|██████████| 2/2 [00:00<00:00,  2.95it/s]100%|██████████| 2/2 [00:00<00:00,  2.81it/s]
+11:24:20 [INFO] train: Epoch [5/5]: Val: mIoU: 0.8494, Accuracy: 0.7853, Loss: 0.4792, MCC: 0.6773
+11:24:22 [INFO] train: Finished Training.
+

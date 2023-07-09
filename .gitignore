@@ -1,0 +1,8 @@
+first.py
+jobSubmit*
+generate/dcgan/
+generate/pix2pix-tensorflow/
+
+# Ignore pycache 
+__pycache__/
+*.pyc
