@@ -1,8 +1,8 @@
 # SkyCloud Generation and Segmentation
 
 ## Segmentation 
-- [DeepLabV3](./segment/SkyCloudAugmentation/deeplabv3/)
-    - [SlurmJob output](./slurm-1570871.out)
+- [DeepLabV3](./segment/deeplabv3/)
+    - [SlurmJob output](./slurm-1571171.out)
 
 ## Generation 
 - [DCGAN](./generate/dcganv2/)
@@ -10,7 +10,7 @@
     - [SlurmJob output](./slurm-1570828.out)
 - [Pix2Pix](./generate/pytorch-CycleGAN-and-pix2pix/)
     - [SlurmJob results](./generate/pytorch-CycleGAN-and-pix2pix/checkpoints/WSISEG_pix2pix/web/index.html)
-    - [SlurmJob output](./slurm-1570869.out)
+    - [SlurmJob output](./slurm-1571169.out)
 
 ## Installation
 - Pytorch Pix2Pix

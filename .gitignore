@@ -9,3 +9,5 @@ __pycache__/
 
 # Deeplabv3 has large model files 
 segment/deeplabv3/experiments/*
+
+generate/pytorch-CycleGAN-and-pix2pix/checkpoints
