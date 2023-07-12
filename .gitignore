@@ -6,3 +6,6 @@ generate/pix2pix-tensorflow/
 # Ignore pycache 
 __pycache__/
 *.pyc
+
+# Deeplabv3 has large model files 
+segment/deeplabv3/experiments/*
