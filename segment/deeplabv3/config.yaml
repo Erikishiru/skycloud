@@ -30,18 +30,18 @@ data:     # images and labels files should have the same filename
     label_path: /home/people/19208824/scratch/piyush/data/WSISEG-Database-split/annotation/val/
 
 base_transform:     # applicable to all datasets.  remove _target_ and subsequent params for no base transforms
-  _target_: torchvision.transforms.Resize
-  size: [64, 64]
-  interpolation: NEAREST
+#   _target_: torchvision.transforms.Resize
+#   size: [64, 64]
+#   interpolation: NEAREST
 
 train_transform:    # remove _target_ and subsequent params for no train transforms
-  _target_: utils.rand_augment.RandAugment
-  n: 4
-  m: 15
+  # _target_: utils.rand_augment.RandAugment
+  # n: 4
+  # m: 15
 
 train_params:
   batch_size: 32
-  max_epochs: 5
+  max_epochs: 20
   enable_early_stopping: True
 
 model_params:
@@ -68,4 +68,5 @@ evaluate:
   image_path: /home/people/19208824/scratch/piyush/data/WSISEG-Database-split/whole-sky-images/test/
   label_path: /home/people/19208824/scratch/piyush/data/WSISEG-Database-split/annotation/test/
   batch_size: 32
-  model_path: /home/people/19208824/scratch/piyush/segment/SkyCloudAugmentation/deeplabv3/experiments/experiment_1/models/model_best.pth
+  model_path: ./experiments/experiment_1/models/model_best.pth
+  save_path: ./experiments/experiment_1/eval_results/

@@ -9,7 +9,7 @@ from hydra.utils import instantiate
 from sklearn.metrics import matthews_corrcoef
 from torch.utils.data import DataLoader
 
-from utils import SkyDataset, get_model
+from utils import SkyDataset, get_model, save_image_tuples
 from logger import logger
 
 np.random.seed(42)
@@ -84,11 +84,14 @@ def main(cfg):
     total_mcc = 0.0
 
     with torch.no_grad():
-        for images, labels in tqdm(test_dataloader):
+        for batch_idx, (images, labels) in enumerate(tqdm(test_dataloader)):
             images = images.to(device)
             labels = labels.to(device)
-            outputs = model(images)["out"]
+            outputs = model(images)["out"]       
             _, predicted = torch.max(outputs, 1)
+
+            # save_image(predicted, cfg.evaluate.save_path)
+            save_image_tuples(images, labels, predicted, cfg.evaluate.save_path + f'batch_{batch_idx}/')   
 
             iou = calculate_iou(predicted, labels)
             accuracy = calculate_pixel_accuracy(labels.cpu().numpy(), predicted.cpu().numpy())

@@ -46,3 +46,16 @@ python dcgan.py
 cd ./generate/pytorch-CycleGAN-and-pix2pix
 python train.py --dataroot ../../data/WSISEG-Database-split/combined --name WSISEG_pix2pix --model pix2pix --preprocess crop --crop_size 256 --direction AtoB
 ```
+
+### Evaluaiton
+```
+python test.py --dataroot ../../data/WSISEG-Database-split/combined --name WSISEG_pix2pix --model pix2pix --direction AtoB
+```
+
+
+### Prediction
+```
+python test.py --dataroot ../../data/WSISEG-Database-split/whole-sky-images --name WSISEG_pix2pix --model test --direction AtoB --netG unet_256 --dataset_mode single --norm batch 
+```
+python test.py --dataroot ../../data/WSISEG-Database/whole-sky-images --name WSISEG_pix2pix --model test --direction AtoB --netG unet_256 --dataset_mode single --norm batch 
+python test.py --dataroot ../../data/WSISEG-Database/whole-sky-images/ --name WSISEG_pix2pix --model test --netG unet_256 --direction AtoB --dataset_mode single --norm batch --preprocess crop --crop_size 256
